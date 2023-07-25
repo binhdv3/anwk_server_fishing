@@ -1,30 +1,30 @@
-const Product = require('../models/Product')
+const Account = require('../models/Account')
 // const { mutipleMongooseToObject } = require('../util/mongoose');
 // const { mongooseToObject } = require('../util/mongoose');
 
-class productController {
+class accountController {
 
     // create --> 
     create(req, res, next) {
         if (req.method == 'POST') { //post them san pham
-            const product = new Product(req.body)
-            product.save()
+            const account = new Account(req.body)
+            account.save()
                 .then(() => res.send('create successfully'))
                 .catch(next)
         }
     }
 
-    //edit -> chỉnh sửa sản phẩm 
+    //edit -> chỉnh sửa account
     edit(req, res, next) {
-        if (req.method == 'PUT') { //put sua san pham
-            Product.updateOne({ _id: req.params.id }, req.body)
+        if (req.method == 'PUT') { //put sua Account
+            Account.updateOne({ _id: req.params.id }, req.body)
                 .catch(next)
         }
     }
 
-    //delete product
+    //delete Account
     delete(req, res, next) {
-        Product.deleteOne({ _id: req.params.id })
+        Account.deleteOne({ _id: req.params.id })
             .catch(next)
     }
 
@@ -44,13 +44,13 @@ class productController {
     // }
 
     //[GET] list san pham
-    get_list_product(req, res, next) {
-        Product.find({})
-            .then(products => {
-                res.json(products)
+    get_list_account(req, res, next) {
+        Account.find({})
+            .then(accounts=> {
+                res.json(accounts)
             })
             .catch(next)
     }
 }
 
-module.exports = new productController;
+module.exports = new accountController;
